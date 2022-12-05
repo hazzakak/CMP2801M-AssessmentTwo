@@ -1,13 +1,17 @@
 #pragma once
 class Point
 {
-private:
+public:
 	int _x;
 	int _y;
-public:
 	Point(int x, int y) {
 		_x = x;
 		_y = y;
+	}
+
+	Point() {
+		_x = 0;
+		_y = 0;
 	}
 };
 
