@@ -8,6 +8,10 @@ protected:
 	int radius;
 	bool isCircular = true;
 public:
+	Circle(int x, int y, int r) {
+		leftTop = Point(x, y);
+		radius = r;
+	}
 	virtual void calculatePoints();
 	virtual void calculateArea();
 	virtual void calculatePerimeter();

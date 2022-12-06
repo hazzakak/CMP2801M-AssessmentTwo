@@ -23,9 +23,23 @@ GOOD LUCK!
 #include "Movable.h"
 
 #include <iostream>
+#include <sstream>
+#include <iterator>
+#include <algorithm>
 #include <string>
 
 using namespace std;
+
+// https://stackoverflow.com/questions/12704337/splitting-a-string-with-strtok-s
+vector<std::string> splitString(const char in[])
+{
+	std::istringstream iss(in);
+	std::istream_iterator<std::string> first(iss), last;
+
+	std::vector<std::string> parts;
+	std::copy(first, last, std::back_inserter(parts));
+	return parts;
+}
 
 int main()
 {
@@ -46,6 +60,7 @@ int main()
 		
 		// implement a string tokenizer to populate the parameters vector 
 		// check function strtok_s
+		parameters = splitString(cstr);
 
 		// as a result of the process, parameters[0] should hold your command, followed by your parameters 
 		string command = parameters[0];
@@ -81,9 +96,11 @@ int main()
 			cout << s->toString();
 		}
 
-		if (command.compare("addC") == 0) {
+		else if (command.compare("addC") == 0) {
 			// get parameters
-			// ...
+			int x = stoi(parameters[1].c_str());
+			int y = stoi(parameters[2].c_str());
+			int r = stoi(parameters[3].c_str());
 			Circle* c = new Circle(x, y, r);
 			shapes.push_back(c);
 			cout << c->toString();
@@ -100,9 +117,10 @@ int main()
 		}
 		else if (command.compare("move") == 0) {
 			// move object at index 
-			int shapeNo; // read from parameters
 			// you may want to check if the index exists or not!
-			
+			int shapeNo = stoi(parameters[1].c_str());
+			int x = stoi(parameters[2].c_str());
+			int y = stoi(parameters[3].c_str());
 			// Study the following code. A Shape object is not Movable, but all derived classes are...
 			// you can't automatically type cast from a Shape to a Movable, but you can force a downcasting
 			Movable *m = dynamic_cast<Movable*>(shapes[shapeNo - 1]);

@@ -2,7 +2,7 @@
 #include "Point.h"
 #include "Shape.h"
 
-virtual void Movable::move(int newX, int newY)
+void Movable::move(int newX, int newY)
 {
 }
 

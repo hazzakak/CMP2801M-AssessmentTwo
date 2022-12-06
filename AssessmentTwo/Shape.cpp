@@ -14,5 +14,5 @@ void Shape::calculatePoints()
 
 string Shape::toString()
 {
-	return string();
+	return "Shape";
 }
