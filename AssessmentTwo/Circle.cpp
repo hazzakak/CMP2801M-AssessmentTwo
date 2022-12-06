@@ -20,3 +20,11 @@ void Circle::move(int newX, int newY) {
 	Circle::setLeftTop(newLeftTop);
 	Circle::calculatePoints();
 }
+
+void Circle::scale(float scaleX)
+{
+	Circle::radius = radius * scaleX;
+	Circle::calculateArea();
+	Circle::calculatePerimeter();
+	Circle::calculatePoints();
+}

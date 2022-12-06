@@ -4,7 +4,7 @@
 
 class Circle : public Shape, public Movable
 {
-private:
+protected:
 	int radius;
 	bool isCircular = true;
 public:
@@ -12,5 +12,6 @@ public:
 	virtual void calculateArea();
 	virtual void calculatePerimeter();
 	void move(int newX, int newY);
+	void scale(float);
 };
 

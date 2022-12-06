@@ -23,3 +23,13 @@ void Rectangle::move(int newX, int newY) {
 	Rectangle::setLeftTop(newLeftTop);
 	Rectangle::calculatePoints();
 }
+
+void Rectangle::scale(float scaleX, float scaleY)
+{
+	Rectangle::_width = _width * scaleX;
+	Rectangle::_height = _height * scaleY;
+	Rectangle::calculateArea();
+	Rectangle::calculatePerimeter();
+	Rectangle::calculatePoints();
+
+}

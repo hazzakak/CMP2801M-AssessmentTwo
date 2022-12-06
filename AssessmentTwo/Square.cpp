@@ -22,3 +22,12 @@ void Square::move(int newX, int newY) {
 	Square::setLeftTop(newLeftTop);
 	Square::calculatePoints();
 }
+
+void Square::scale(float scaleX)
+{
+	Square::edge = edge * scaleX;
+	Square::calculateArea();
+	Square::calculatePerimeter();
+	Square::calculatePoints();
+
+}

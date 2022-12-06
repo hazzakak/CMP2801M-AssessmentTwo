@@ -19,5 +19,6 @@ public:
 	virtual void calculateArea();
 	virtual void calculatePerimeter();
 	void move(int newX, int newY);
+	void scale(float, float);
 };
 
