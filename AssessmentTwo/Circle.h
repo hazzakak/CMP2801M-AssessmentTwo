@@ -5,7 +5,11 @@
 class Circle : public Shape, public Movable
 {
 private:
-	double radius;
+	int radius;
 	bool isCircular = true;
+public:
+	virtual void calculatePoints();
+	virtual void calculateArea();
+	virtual void calculatePerimeter();
 };
 
