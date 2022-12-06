@@ -60,10 +60,10 @@ int main()
 			// note that the the parameters vector contains ascii values
 			// HINT: stoi function converts from string to int
 
-			x = parameters[1].c_str(); // fix me! also note that x is not previously defined :(
-			// int y = ...
-			// int h = ...
-			// int w = ...
+			int x = stoi(parameters[1].c_str()); 
+			int y = stoi(parameters[2].c_str());
+			int h = stoi(parameters[3].c_str());
+			int w = stoi(parameters[4].c_str());
 
 
 			Rectangle* r = new Rectangle(x, y, h, w);
@@ -73,7 +73,9 @@ int main()
 		}
 		else if (command.compare("addS") == 0) {
 			// get parameters
-			// ...
+			int x = stoi(parameters[1].c_str());
+			int y = stoi(parameters[2].c_str());
+			int e = stoi(parameters[3].c_str());
 			Square* s = new Square(x, y, e);
 			shapes.push_back(s);
 			cout << s->toString();

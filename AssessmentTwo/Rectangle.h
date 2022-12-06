@@ -5,11 +5,18 @@
 class Rectangle : public Shape, public Movable
 {
 private:
-	double _height;
-	double _width;
+	int _height;
+	int _width;
 public:
-	double getHeight() { return _height; }
-	double width() { return _width; }
+	Rectangle(int LTX, int LTY, int h, int w) {
+		_height = h;
+		_width = w;
+		leftTop = Point(LTX, LTY);
+	}
+	int getHeight() { return _height; }
+	int getWidth() { return _width; }
 	virtual void calculatePoints();
+	virtual void calculateArea();
+	virtual void calculatePerimeter();
 };
 
