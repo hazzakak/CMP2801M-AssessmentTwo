@@ -1,7 +1,7 @@
 #include "Circle.h"
 
 void Circle::calculatePoints() {
-	Point rightBottom = Point(leftTop._x + (2*radius), leftTop._y + (2*radius);
+	Point rightBottom = Point(leftTop._x + (2*radius), leftTop._y + (2*radius));
 	points = { leftTop ,rightBottom };
 }
 
