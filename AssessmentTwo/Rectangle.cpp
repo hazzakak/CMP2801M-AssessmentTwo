@@ -17,3 +17,9 @@ void Rectangle::calculatePerimeter()
 {
 	perimeter = (_width * 2) + (_height * 2);
 }
+
+void Rectangle::move(int newX, int newY) {
+	Point newLeftTop = Point(newX, newY);
+	Rectangle::setLeftTop(newLeftTop);
+	Rectangle::calculatePoints();
+}

@@ -16,3 +16,9 @@ void Square::calculatePerimeter()
 {
 	perimeter = (edge * 4);
 }
+
+void Square::move(int newX, int newY) {
+	Point newLeftTop = Point(newX, newY);
+	Square::setLeftTop(newLeftTop);
+	Square::calculatePoints();
+}

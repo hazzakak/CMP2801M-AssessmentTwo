@@ -1,9 +1,11 @@
 #include "Movable.h"
+#include "Point.h"
+#include "Shape.h"
 
-void Movable::move()
+virtual void Movable::move(int newX, int newY)
 {
 }
 
-void Movable::scale()
+void Movable::scale(float, float)
 {
 }

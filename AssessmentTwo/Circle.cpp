@@ -14,3 +14,9 @@ void Circle::calculatePerimeter()
 {
 	perimeter = 3.14159265*radius*2;
 }
+
+void Circle::move(int newX, int newY) {
+	Point newLeftTop = Point(newX, newY);
+	Circle::setLeftTop(newLeftTop);
+	Circle::calculatePoints();
+}

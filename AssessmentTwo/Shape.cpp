@@ -1,18 +1,15 @@
 #include "Shape.h"
 
-double Shape::calculateArea()
+void Shape::calculateArea()
 {
-	return 0.0;
 }
 
-double Shape::calculatePerimeter()
+void Shape::calculatePerimeter()
 {
-	return 0.0;
 }
 
-int Shape::calculatePoints()
+void Shape::calculatePoints()
 {
-	return 0;
 }
 
 string Shape::toString()

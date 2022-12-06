@@ -2,7 +2,7 @@
 class Movable
 {
 public:
-	void move();
-	void scale();
+	virtual void move(int, int);
+	void scale(float, float);
 };
 

@@ -15,9 +15,10 @@ protected:
 	vector<Point> points{Point(0,0), Point(0,0), Point(0,0), Point(0,0)};
 
 public:
-	virtual double calculateArea();
-	virtual double calculatePerimeter();
-	virtual int calculatePoints();
+	void setLeftTop(Point pnt) { leftTop = pnt; }
+	virtual void calculateArea();
+	virtual void calculatePerimeter();
+	virtual void calculatePoints();
 	string toString();
 };
 
