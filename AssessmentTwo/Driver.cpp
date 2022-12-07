@@ -183,7 +183,7 @@ int main()
 			}
 		}
 		else if (command.compare("display") == 0) {
-			// TODO: a display function which shows all objects stored in shapes?
+			// TODO: a display function which shows all objects stored in shapes
 		}
 
 		// do any necessary postprocessing at the end of each loop...
