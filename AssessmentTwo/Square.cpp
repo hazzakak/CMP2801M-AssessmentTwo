@@ -9,7 +9,7 @@ void Square::calculatePoints() {
 
 void Square::calculateArea()
 {
-	area = edge^2;
+	area = edge*edge;
 }
 
 void Square::calculatePerimeter()
@@ -30,4 +30,9 @@ void Square::scale(float scaleX)
 	Square::calculatePerimeter();
 	Square::calculatePoints();
 
+}
+
+string Square::toString()
+{
+	return (string)"Shape: Square\nEdge: " + to_string(edge) + "\nArea: " + to_string(area) + "\nPerimeter: " + to_string(perimeter) + "\nPoints: " + Shape::pointsToString();
 }

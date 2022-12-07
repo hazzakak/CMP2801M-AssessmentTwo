@@ -83,9 +83,13 @@ int main()
 			int h = stoi(parameters[3].c_str());
 			int w = stoi(parameters[4].c_str());
 
-
 			Rectangle* r = new Rectangle(x, y, h, w);
 			shapes.push_back(r);
+
+			r->calculateArea();
+			r->calculatePerimeter();
+			r->calculatePoints();
+
 			cout << r->toString(); /* TODO: instead of this, you may implement operator overloading and 
 									use cout << r which will give you additional points */
 		}
@@ -94,8 +98,14 @@ int main()
 			int x = stoi(parameters[1].c_str());
 			int y = stoi(parameters[2].c_str());
 			int e = stoi(parameters[3].c_str());
+
 			Square* s = new Square(x, y, e);
 			shapes.push_back(s);
+
+			s->calculateArea();
+			s->calculatePerimeter();
+			s->calculatePoints();
+
 			cout << s->toString();
 		}
 
@@ -104,8 +114,14 @@ int main()
 			int x = stoi(parameters[1].c_str());
 			int y = stoi(parameters[2].c_str());
 			int r = stoi(parameters[3].c_str());
+
 			Circle* c = new Circle(x, y, r);
 			shapes.push_back(c);
+
+			c->calculateArea();
+			c->calculatePerimeter();
+			c->calculatePoints();
+
 			cout << c->toString();
 			
 		}
@@ -118,10 +134,10 @@ int main()
 			// You may need to use type casting wisely to use polymorphic functionality!
 
 			int shapeIndex = stoi(parameters[1].c_str());
-			int scaleX = stoi(parameters[2].c_str());
-			int scaleY = stoi(parameters[3].c_str());
+			float scaleX = stof(parameters[2].c_str());
+			float scaleY = stof(parameters[3].c_str());
 
-			Shape* shp = shapes[shapeIndex];
+			Shape* shp = shapes[shapeIndex-1];
 
 			Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
 			Square* shpSquare = dynamic_cast<Square*> (shp);
@@ -129,39 +145,50 @@ int main()
 
 			if (shpRect != NULL) {
 				shpRect->scale(scaleX, scaleY);
+				cout << shpRect->toString();
 			}
 			if (shpSquare != NULL) {
 				shpSquare->scale(scaleX);
+				cout << shpSquare->toString();
 			}
 			if (shpCircle != NULL) {
 				shpCircle->scale(scaleX);
+				cout << shpCircle->toString();
 			}
-
-			cout << shp->toString();
-			//shp->scale();
 		}
 		else if (command.compare("move") == 0) {
 			// move object at index 
-			// you may want to check if the index exists or not!
-			int shapeNo = stoi(parameters[1].c_str());
-			int x = stoi(parameters[2].c_str());
-			int y = stoi(parameters[3].c_str());
-			// Study the following code. A Shape object is not Movable, but all derived classes are...
-			// you can't automatically type cast from a Shape to a Movable, but you can force a downcasting
-			Movable *m = dynamic_cast<Movable*>(shapes[shapeNo - 1]);
-			m->move(x, y);
-			// scale should work similarly...
+			// TODO: you may want to check if the index exists or not!
+			int shapeIndex = stoi(parameters[1].c_str());
+			int moveX = stoi(parameters[2].c_str());
+			int moveY = stoi(parameters[3].c_str());
+			
+			Shape* shp = shapes[shapeIndex-1];
 
-			// note that here you should see the corresponding toString output for the derived classes...
-			// if toString is not a virtual function, you may see the base class functionality :(
-			cout << shapes[shapeNo - 1]->toString();
+			Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
+			Square* shpSquare = dynamic_cast<Square*> (shp);
+			Circle* shpCircle = dynamic_cast<Circle*> (shp);
+
+			if (shpRect != NULL) {
+				shpRect->move(moveX, moveY);
+				cout << shpRect->toString();
+			}
+			if (shpSquare != NULL) {
+				shpSquare->move(moveX, moveY);
+				cout << shpSquare->toString();
+			}
+			if (shpCircle != NULL) {
+				shpCircle->move(moveX, moveY);
+				cout << shpCircle->toString();
+			}
 		}
 		else if (command.compare("display") == 0) {
-			// this is not given in our example, but why don't you implement a display function which shows all objects stored in shapes?
+			// TODO: a display function which shows all objects stored in shapes?
 		}
 
 		// do any necessary postprocessing at the end of each loop...
 		// yes, there is some necessary postprocessing...
+		// FIGURE OUT WTH THIS MEANS
 		cout << endl << endl;
 	}
 

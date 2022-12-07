@@ -1,5 +1,5 @@
 #include "Rectangle.h"
-
+#include <format>
 
 void Rectangle::calculatePoints() {
 	Point rightTop = Point(leftTop._x + _width, leftTop._y);
@@ -32,4 +32,9 @@ void Rectangle::scale(float scaleX, float scaleY)
 	Rectangle::calculatePerimeter();
 	Rectangle::calculatePoints();
 
+}
+
+string Rectangle::toString()
+{
+	return (string)"Shape: Rectangle\nWidth: " + to_string(_width) + "\nHeight: " + to_string(_height) + "\nArea: " + to_string(area) + "\nPerimeter: " + to_string(perimeter) + "\nPoints: " + Shape::pointsToString();
 }

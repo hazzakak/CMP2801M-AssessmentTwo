@@ -6,7 +6,7 @@
 class Square : public Shape, public Movable
 {
 private:
-	int edge;
+	float edge;
 public:
 	Square(int x, int y, int e) {
 		edge = e;
@@ -18,5 +18,6 @@ public:
 	virtual void calculatePerimeter();
 	void move(int newX, int newY);
 	void scale(float scaleX);
+	string toString();
 };
 

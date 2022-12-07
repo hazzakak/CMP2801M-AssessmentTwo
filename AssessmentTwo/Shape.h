@@ -8,10 +8,10 @@ using namespace std;
 class Shape
 {
 protected:
-	double area;
+	float area;
 	bool isCircular = false;
 	Point leftTop;
-	int perimeter;
+	float perimeter;
 	vector<Point> points{Point(0,0), Point(0,0), Point(0,0), Point(0,0)};
 
 public:
@@ -20,5 +20,6 @@ public:
 	virtual void calculatePerimeter();
 	virtual void calculatePoints();
 	string toString();
+	string pointsToString();
 };
 

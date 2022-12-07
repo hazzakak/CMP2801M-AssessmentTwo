@@ -7,7 +7,7 @@ void Circle::calculatePoints() {
 
 void Circle::calculateArea()
 {
-	area = 3.14159265*(radius^2);
+	area = 3.14159265*(radius*radius);
 }
 
 void Circle::calculatePerimeter()
@@ -31,5 +31,5 @@ void Circle::scale(float scaleX)
 
 string Circle::toString()
 {
-	return string();
+	return (string)"Shape: Circle\nRadius: " + to_string(radius) + "\nDiameter: " + to_string(radius*2) + "\nArea: " + to_string(area) + "\nPerimeter: " + to_string(perimeter) + "\nPoints: " + Shape::pointsToString();
 }

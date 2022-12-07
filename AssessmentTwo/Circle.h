@@ -5,7 +5,7 @@
 class Circle : public Shape, public Movable
 {
 protected:
-	int radius;
+	float radius;
 	bool isCircular = true;
 public:
 	Circle(int x, int y, int r) {
