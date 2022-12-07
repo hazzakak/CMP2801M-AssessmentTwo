@@ -28,3 +28,8 @@ void Circle::scale(float scaleX)
 	Circle::calculatePerimeter();
 	Circle::calculatePoints();
 }
+
+string Circle::toString()
+{
+	return string();
+}

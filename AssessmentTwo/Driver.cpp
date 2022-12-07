@@ -41,6 +41,10 @@ vector<std::string> splitString(const char in[])
 	return parts;
 }
 
+void scale(Shape obj, int scaleX, int scaleY) {
+
+}
+
 int main()
 {
 	string userCommand;
@@ -58,22 +62,21 @@ int main()
 
 		strcpy_s(cstr, userCommand.length()+1, userCommand.c_str());
 		
-		// implement a string tokenizer to populate the parameters vector 
-		// check function strtok_s
+		// splits string into parameters.
 		parameters = splitString(cstr);
 
-		// as a result of the process, parameters[0] should hold your command, followed by your parameters 
+		// parameter[0] is the command
 		string command = parameters[0];
-
-
-		// in the following code, consider checking for the arguments.
-		// in case of too few arguments, you may remind the user the correct format
 
 		if (command.compare("addR") == 0) {
 			// get parameters in the correct order
-			// The following four lines have a type mismatch error
-			// note that the the parameters vector contains ascii values
-			// HINT: stoi function converts from string to int
+
+			// addR <x> <y> <height> <width>
+			// if not enough parameters
+			if (parameters[4] == "") {
+				cout << "4 parameters are required: 'addR <x> <y> <height> <width>'" << endl;
+				break;
+			}
 
 			int x = stoi(parameters[1].c_str()); 
 			int y = stoi(parameters[2].c_str());
@@ -83,7 +86,7 @@ int main()
 
 			Rectangle* r = new Rectangle(x, y, h, w);
 			shapes.push_back(r);
-			cout << r->toString(); /* instead of this, you may implement operator overloadig and 
+			cout << r->toString(); /* TODO: instead of this, you may implement operator overloading and 
 									use cout << r which will give you additional points */
 		}
 		else if (command.compare("addS") == 0) {
@@ -113,7 +116,29 @@ int main()
 			// Multiple inhertitance is tricky! The Shape class does nto have a scale function, the Movable does!
 			// As a result all your derived classes have scale functions... 
 			// You may need to use type casting wisely to use polymorphic functionality!
-			
+
+			int shapeIndex = stoi(parameters[1].c_str());
+			int scaleX = stoi(parameters[2].c_str());
+			int scaleY = stoi(parameters[3].c_str());
+
+			Shape* shp = shapes[shapeIndex];
+
+			Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
+			Square* shpSquare = dynamic_cast<Square*> (shp);
+			Circle* shpCircle = dynamic_cast<Circle*> (shp);
+
+			if (shpRect != NULL) {
+				shpRect->scale(scaleX, scaleY);
+			}
+			if (shpSquare != NULL) {
+				shpSquare->scale(scaleX);
+			}
+			if (shpCircle != NULL) {
+				shpCircle->scale(scaleX);
+			}
+
+			cout << shp->toString();
+			//shp->scale();
 		}
 		else if (command.compare("move") == 0) {
 			// move object at index 

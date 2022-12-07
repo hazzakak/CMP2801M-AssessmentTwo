@@ -17,5 +17,6 @@ public:
 	virtual void calculatePerimeter();
 	void move(int newX, int newY);
 	void scale(float);
+	string toString();
 };
 
