@@ -90,10 +90,17 @@ int main()
 			r->calculatePerimeter();
 			r->calculatePoints();
 
-			cout << r->toString(); /* TODO: instead of this, you may implement operator overloading and 
+			cout << *r; /* TODO: instead of this, you may implement operator overloading and 
 									use cout << r which will give you additional points */
 		}
 		else if (command.compare("addS") == 0) {
+			// addS <x> <y> <edge>
+			// if not enough parameters
+			if (parameters[3] == "") {
+				cout << "3 parameters are required: 'addS <x> <y> <edge>'" << endl;
+				break;
+			}
+
 			// get parameters
 			int x = stoi(parameters[1].c_str());
 			int y = stoi(parameters[2].c_str());
@@ -106,10 +113,17 @@ int main()
 			s->calculatePerimeter();
 			s->calculatePoints();
 
-			cout << s->toString();
+			cout << *s;
 		}
 
 		else if (command.compare("addC") == 0) {
+			// addC <x> <y> <radius>
+			// if not enough parameters
+			if (parameters[3] == "") {
+				cout << "3 parameters are required: 'addC <x> <y> <radius>'" << endl;
+				break;
+			}
+
 			// get parameters
 			int x = stoi(parameters[1].c_str());
 			int y = stoi(parameters[2].c_str());
@@ -122,7 +136,7 @@ int main()
 			c->calculatePerimeter();
 			c->calculatePoints();
 
-			cout << c->toString();
+			cout << *c;
 			
 		}
 		else if (command.compare("scale") == 0) {
@@ -132,10 +146,22 @@ int main()
 			// Multiple inhertitance is tricky! The Shape class does nto have a scale function, the Movable does!
 			// As a result all your derived classes have scale functions... 
 			// You may need to use type casting wisely to use polymorphic functionality!
+			
+			// scale <index> <scaleX> <scaleY>
+			// if not enough parameters
+			if (parameters[3] == "") {
+				cout << "3 parameters are required: 'scale <index> <scaleX> <scaleY>'" << endl;
+				break;
+			}
 
 			int shapeIndex = stoi(parameters[1].c_str());
 			float scaleX = stof(parameters[2].c_str());
 			float scaleY = stof(parameters[3].c_str());
+
+			if (shapes.size() > shapeIndex || shapeIndex < 1) {
+				cout << "Scale command requires 'scale <index> <scaleX> <scaleY>'" << endl;
+				break;
+			}
 
 			Shape* shp = shapes[shapeIndex-1];
 
@@ -145,15 +171,15 @@ int main()
 
 			if (shpRect != NULL) {
 				shpRect->scale(scaleX, scaleY);
-				cout << shpRect->toString();
+				cout << *shpRect;
 			}
 			if (shpSquare != NULL) {
 				shpSquare->scale(scaleX);
-				cout << shpSquare->toString();
+				cout << *shpSquare;
 			}
 			if (shpCircle != NULL) {
 				shpCircle->scale(scaleX);
-				cout << shpCircle->toString();
+				cout << *shpCircle;
 			}
 		}
 		else if (command.compare("move") == 0) {
@@ -162,6 +188,11 @@ int main()
 			int shapeIndex = stoi(parameters[1].c_str());
 			int moveX = stoi(parameters[2].c_str());
 			int moveY = stoi(parameters[3].c_str());
+
+			if (shapes.size() > shapeIndex || shapeIndex < 1) {
+				cout << "Move command requires 'move <shapeIndex> <moveX> <moveY>'" << endl;
+				break;
+			}
 			
 			Shape* shp = shapes[shapeIndex-1];
 
@@ -171,19 +202,35 @@ int main()
 
 			if (shpRect != NULL) {
 				shpRect->move(moveX, moveY);
-				cout << shpRect->toString();
+				cout << *shpRect;
 			}
 			if (shpSquare != NULL) {
 				shpSquare->move(moveX, moveY);
-				cout << shpSquare->toString();
+				cout << *shpSquare;
 			}
 			if (shpCircle != NULL) {
 				shpCircle->move(moveX, moveY);
-				cout << shpCircle->toString();
+				cout << *shpCircle;
 			}
 		}
 		else if (command.compare("display") == 0) {
-			// TODO: a display function which shows all objects stored in shapes
+			for (int i = 0; i < shapes.size(); i++) {
+				Shape* shp = shapes[i];
+
+				Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
+				Square* shpSquare = dynamic_cast<Square*> (shp);
+				Circle* shpCircle = dynamic_cast<Circle*> (shp);
+
+				if (shpRect != NULL) {
+					cout << "Index: " << i+1 << endl<< *shpRect << endl << endl;
+				}
+				if (shpSquare != NULL) {
+					cout << "Index: " << i + 1 << endl << *shpSquare << endl << endl;
+				}
+				if (shpCircle != NULL) {
+					cout << "Index: " << i + 1 << endl << *shpCircle << endl << endl;
+				}
+			}
 		}
 
 		// do any necessary postprocessing at the end of each loop...

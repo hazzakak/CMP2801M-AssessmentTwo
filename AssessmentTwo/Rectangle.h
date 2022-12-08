@@ -13,13 +13,21 @@ public:
 		_width = w;
 		leftTop = Point(LTX, LTY);
 	}
+	friend ostream& operator<<(ostream& output, Rectangle& rect) {
+		output << "Shape: Rectangle\nWidth: " << rect._width << "\nHeight: " << rect._height << "\nArea: " << rect.area << "\nPerimeter: " << rect.perimeter << "\nPoints: " + rect.pointsToString();
+		return output;
+	}
+
 	int getHeight() { return _height; }
 	int getWidth() { return _width; }
+
 	virtual void calculatePoints();
 	virtual void calculateArea();
 	virtual void calculatePerimeter();
+
 	void move(int newX, int newY);
 	void scale(float, float);
+
 	string toString();
 };
 

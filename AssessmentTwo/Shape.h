@@ -2,6 +2,7 @@
 #include <string>
 #include "Point.h";
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
