@@ -41,10 +41,6 @@ vector<std::string> splitString(const char in[])
 	return parts;
 }
 
-void scale(Shape obj, int scaleX, int scaleY) {
-
-}
-
 int main()
 {
 	string userCommand;
@@ -73,7 +69,9 @@ int main()
 
 			// addR <x> <y> <height> <width>
 			// if not enough parameters
-			if (parameters[4] == "") {
+
+			cout << parameters.size() << endl;
+			if (parameters.size() < 5 || parameters.size() > 5) {
 				cout << "4 parameters are required: 'addR <x> <y> <height> <width>'" << endl;
 				break;
 			}
@@ -90,13 +88,12 @@ int main()
 			r->calculatePerimeter();
 			r->calculatePoints();
 
-			cout << *r; /* TODO: instead of this, you may implement operator overloading and 
-									use cout << r which will give you additional points */
+			cout << *r;
 		}
 		else if (command.compare("addS") == 0) {
 			// addS <x> <y> <edge>
 			// if not enough parameters
-			if (parameters[3] == "") {
+			if (parameters.size() < 4 || parameters.size() > 4) {
 				cout << "3 parameters are required: 'addS <x> <y> <edge>'" << endl;
 				break;
 			}
@@ -119,7 +116,7 @@ int main()
 		else if (command.compare("addC") == 0) {
 			// addC <x> <y> <radius>
 			// if not enough parameters
-			if (parameters[3] == "") {
+			if (parameters.size() < 4 || parameters.size() > 4) {
 				cout << "3 parameters are required: 'addC <x> <y> <radius>'" << endl;
 				break;
 			}
@@ -149,7 +146,7 @@ int main()
 			
 			// scale <index> <scaleX> <scaleY>
 			// if not enough parameters
-			if (parameters[3] == "") {
+			if (parameters.size() < 4 || parameters.size() > 4) {
 				cout << "3 parameters are required: 'scale <index> <scaleX> <scaleY>'" << endl;
 				break;
 			}
@@ -159,7 +156,7 @@ int main()
 			float scaleY = stof(parameters[3].c_str());
 
 			if (shapes.size() > shapeIndex || shapeIndex < 1) {
-				cout << "Scale command requires 'scale <index> <scaleX> <scaleY>'" << endl;
+				cout << "Scale command requires 'scale <index> <scaleX> <scaleY>', index must be a correct value." << endl;
 				break;
 			}
 
@@ -184,13 +181,17 @@ int main()
 		}
 		else if (command.compare("move") == 0) {
 			// move object at index 
-			// TODO: you may want to check if the index exists or not!
+			if (parameters.size() < 4 || parameters.size() > 4) {
+				cout << "3 parameters are required: 'move <shapeIndex> <moveX> <moveY>'" << endl;
+				break;
+			}
+
 			int shapeIndex = stoi(parameters[1].c_str());
 			int moveX = stoi(parameters[2].c_str());
 			int moveY = stoi(parameters[3].c_str());
 
 			if (shapes.size() > shapeIndex || shapeIndex < 1) {
-				cout << "Move command requires 'move <shapeIndex> <moveX> <moveY>'" << endl;
+				cout << "Move command requires 'move <shapeIndex> <moveX> <moveY>', index must be a correct value." << endl;
 				break;
 			}
 			
@@ -232,11 +233,17 @@ int main()
 				}
 			}
 		}
+		else {
+			cout << "Incorrect command" << endl;
+		}
 
-		// do any necessary postprocessing at the end of each loop...
-		// yes, there is some necessary postprocessing...
-		// FIGURE OUT WTH THIS MEANS
-		cout << endl << endl;
+		// destruct this as it is explicitly created with new.
+		delete cstr;
+	}
+	for (int a = 0; a < shapes.size(); a++)
+	{
+		Shape* shp = shapes[a];
+		delete shp;
 	}
 
 	cout << "Press any key to continue...";

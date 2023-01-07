@@ -17,10 +17,11 @@ protected:
 
 public:
 	void setLeftTop(Point pnt) { leftTop = pnt; }
-	virtual void calculateArea();
+	virtual void calculateArea() = 0;
 	virtual void calculatePerimeter();
 	virtual void calculatePoints();
 	string toString();
 	string pointsToString();
+	void operator delete(void*);
 };
 
