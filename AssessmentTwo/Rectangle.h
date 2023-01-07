@@ -14,7 +14,7 @@ public:
 		leftTop = Point(LTX, LTY);
 	}
 	friend ostream& operator<<(ostream& output, Rectangle& rect) {
-		output << "Shape: Rectangle\nWidth: " << rect._width << "\nHeight: " << rect._height << "\nArea: " << rect.area << "\nPerimeter: " << rect.perimeter << "\nPoints: " + rect.pointsToString();
+		output << "Shape: Rectangle\nWidth: " << rect._width << "\nHeight: " << rect._height << "\nArea: " << rect.area << "\nPerimeter: " << rect.perimeter << "\nPoints: " + rect.pointsToString() << endl;;
 		return output;
 	}
 
@@ -25,7 +25,7 @@ public:
 	virtual void calculateArea();
 	virtual void calculatePerimeter();
 
-	void move(int newX, int newY);
+	virtual void move(int, int);
 	void scale(float, float);
 
 	string toString();

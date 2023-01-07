@@ -3,29 +3,38 @@
 #include "Movable.h"
 #include "Rectangle.h"
 
+// The Square class represents a square shape that can be moved and scaled.
 class Square : public Shape, public Movable
 {
 private:
-	float edge;
+    // The length of the edge of the square.
+    float edge;
 public:
-	Square(int x, int y, int e) {
-		edge = e;
-		Shape::leftTop._x = x;
-		Shape::leftTop._y = y;
-	}
+    // Constructs a new square with the given edge length and top-left position.
+    Square(int x, int y, int e) {
+        edge = e;
+        Shape::leftTop._x = x;
+        Shape::leftTop._y = y;
+    }
 
-	friend ostream& operator<<(ostream& output, Square& sqr) {
-		output << "Shape: Square\nEdge: " << sqr.edge << "\nArea: " << sqr.area << "\nPerimeter: " << sqr.perimeter << "\nPoints: " + sqr.pointsToString();
-		return output;
-	}
+    // Overloads the stream insertion operator to print a string representation of the square.
+    friend ostream& operator<<(ostream& output, Square& sqr) {
+        output << "Shape: Square\nEdge: " << sqr.edge << "\nArea: " << sqr.area << "\nPerimeter: " << sqr.perimeter << "\nPoints: " + sqr.pointsToString() << endl;
+        return output;
+    }
 
-	virtual void calculatePoints();
-	virtual void calculateArea();
-	virtual void calculatePerimeter();
+    // Calculates the points that define the boundaries of the square.
+    virtual void calculatePoints();
+    // Calculates the area of the square.
+    virtual void calculateArea();
+    // Calculates the perimeter of the square.
+    virtual void calculatePerimeter();
 
-	void move(int newX, int newY);
-	void scale(float scaleX);
+    // Moves the square to the specified position.
+    virtual void move(int, int);
+    // Scales the square by the specified amount in the x-direction.
+    void scale(float scaleX);
 
-	string toString();
+    // Returns a string representation of the square.
+    string toString();
 };
-

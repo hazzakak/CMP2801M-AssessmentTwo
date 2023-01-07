@@ -30,9 +30,13 @@ GOOD LUCK!
 
 using namespace std;
 
-// https://stackoverflow.com/questions/12704337/splitting-a-string-with-strtok-s
 vector<std::string> splitString(const char in[])
 {
+	// This function takes a character array 'in' and splits it into a vector of strings.
+	// It does this by creating an input string stream (iss) from the character array, 
+	// creating an iterator that reads from the stream and constructs strings, and
+	// copying the iterator's elements into a vector of strings.
+
 	std::istringstream iss(in);
 	std::istream_iterator<std::string> first(iss), last;
 
@@ -43,164 +47,146 @@ vector<std::string> splitString(const char in[])
 
 int main()
 {
+	// Initialize variables for user input and storage of shapes and command parameters.
 	string userCommand;
-	vector <Shape*> shapes;     // this one will hold your shapes
-	vector <string> parameters; // this one will hold parameters for the commands
+	vector <Shape*> shapes;
+	vector <string> parameters;
 
-
-	while (userCommand.compare("exit") != 0) 
+	// Continuously prompt the user for a command until they enter "exit".
+	while (userCommand.compare("exit") != 0)
 	{
 		cout << "Enter the command: ";
-		
 		getline(cin, userCommand);
 
-		char * cstr = new char[userCommand.length() + 1];
+		// Convert the user command string to a character array for use with strtok().
+		char* cstr = new char[userCommand.length() + 1];
+		strcpy_s(cstr, userCommand.length() + 1, userCommand.c_str());
 
-		strcpy_s(cstr, userCommand.length()+1, userCommand.c_str());
-		
-		// splits string into parameters.
+		// Split the character array into a vector of strings using the splitString() function.
 		parameters = splitString(cstr);
 
-		// parameter[0] is the command
+		// The first element in the vector will be the command.
 		string command = parameters[0];
 
+		// Check the command and execute the corresponding block of code.
 		if (command.compare("addR") == 0) {
-			// get parameters in the correct order
-
-			// addR <x> <y> <height> <width>
-			// if not enough parameters
-
-			cout << parameters.size() << endl;
+			// If the command is "addR", create a new rectangle with the given parameters.
+			// First, check if the correct number of parameters were given.
+			// If not, print an error message and exit the loop.
 			if (parameters.size() < 5 || parameters.size() > 5) {
 				cout << "4 parameters are required: 'addR <x> <y> <height> <width>'" << endl;
 				break;
 			}
 
-			int x = stoi(parameters[1].c_str()); 
+			// Convert the string parameters to integers and use them to create a new rectangle object.
+			int x = stoi(parameters[1].c_str());
 			int y = stoi(parameters[2].c_str());
 			int h = stoi(parameters[3].c_str());
 			int w = stoi(parameters[4].c_str());
-
 			Rectangle* r = new Rectangle(x, y, h, w);
+
+			// Add the new rectangle to the shapes vector.
 			shapes.push_back(r);
 
+			// Calculate and print the area, perimeter, and points of the rectangle.
 			r->calculateArea();
 			r->calculatePerimeter();
 			r->calculatePoints();
-
 			cout << *r;
 		}
 		else if (command.compare("addS") == 0) {
-			// addS <x> <y> <edge>
-			// if not enough parameters
+			// If the command is "addS", create a new square with the given parameters.
+			// First, check if the correct number of parameters were given.
+			// If not, print an error message and exit the loop.
 			if (parameters.size() < 4 || parameters.size() > 4) {
 				cout << "3 parameters are required: 'addS <x> <y> <edge>'" << endl;
 				break;
 			}
 
-			// get parameters
+			// Convert the string parameters to integers and use them to create a new square object.
 			int x = stoi(parameters[1].c_str());
 			int y = stoi(parameters[2].c_str());
 			int e = stoi(parameters[3].c_str());
-
 			Square* s = new Square(x, y, e);
+
+			// Add the new square to the shapes vector.
 			shapes.push_back(s);
 
+			// Calculate and print the area, perimeter, and points of the square.
 			s->calculateArea();
 			s->calculatePerimeter();
 			s->calculatePoints();
-
 			cout << *s;
 		}
-
 		else if (command.compare("addC") == 0) {
-			// addC <x> <y> <radius>
-			// if not enough parameters
+			// If the command is "addC", create a new circle with the given parameters.
+			// First, check if the correct number of parameters were given.
+			// If not, print an error message and exit the loop.
 			if (parameters.size() < 4 || parameters.size() > 4) {
 				cout << "3 parameters are required: 'addC <x> <y> <radius>'" << endl;
 				break;
 			}
 
-			// get parameters
+			// Convert the string parameters to integers and use them to create a new circle object.
 			int x = stoi(parameters[1].c_str());
 			int y = stoi(parameters[2].c_str());
 			int r = stoi(parameters[3].c_str());
-
 			Circle* c = new Circle(x, y, r);
+
+			// Add the new circle to the shapes vector.
 			shapes.push_back(c);
 
+			// Calculate and print the area, perimeter, and points of the circle.
 			c->calculateArea();
 			c->calculatePerimeter();
 			c->calculatePoints();
-
 			cout << *c;
-			
 		}
 		else if (command.compare("scale") == 0) {
-			// scale object at index... the scaling needs to be isotropic in case of circle and square 
-			// you may want to check if the index exists or not!
-			
-			// Multiple inhertitance is tricky! The Shape class does nto have a scale function, the Movable does!
-			// As a result all your derived classes have scale functions... 
-			// You may need to use type casting wisely to use polymorphic functionality!
-			
-			// scale <index> <scaleX> <scaleY>
-			// if not enough parameters
+			// If the command is "scale", scale the shape at the given index by the given amount.
+			// First, check if the correct number of parameters were given.
+			// If not, print an error message and exit the loop.
 			if (parameters.size() < 4 || parameters.size() > 4) {
 				cout << "3 parameters are required: 'scale <index> <scaleX> <scaleY>'" << endl;
 				break;
 			}
 
+			// Convert the string parameters to integers and floats.
 			int shapeIndex = stoi(parameters[1].c_str());
 			float scaleX = stof(parameters[2].c_str());
 			float scaleY = stof(parameters[3].c_str());
 
-			if (shapes.size() > shapeIndex || shapeIndex < 1) {
-				cout << "Scale command requires 'scale <index> <scaleX> <scaleY>', index must be a correct value." << endl;
-				break;
-			}
-
-			Shape* shp = shapes[shapeIndex-1];
-
-			Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
-			Square* shpSquare = dynamic_cast<Square*> (shp);
-			Circle* shpCircle = dynamic_cast<Circle*> (shp);
-
-			if (shpRect != NULL) {
-				shpRect->scale(scaleX, scaleY);
-				cout << *shpRect;
-			}
-			if (shpSquare != NULL) {
-				shpSquare->scale(scaleX);
-				cout << *shpSquare;
-			}
-			if (shpCircle != NULL) {
-				shpCircle->scale(scaleX);
-				cout << *shpCircle;
-			}
-		}
-		else if (command.compare("move") == 0) {
-			// move object at index 
+		} else if (command.compare("move") == 0) {
+			// If the command is "move", move the shape at the given index by the given amount.
+			// First, check if the correct number of parameters were given.
+			// If not, print an error message and exit the loop.
 			if (parameters.size() < 4 || parameters.size() > 4) {
 				cout << "3 parameters are required: 'move <shapeIndex> <moveX> <moveY>'" << endl;
 				break;
 			}
 
+			// Convert the string parameters to integers.
 			int shapeIndex = stoi(parameters[1].c_str());
 			int moveX = stoi(parameters[2].c_str());
 			int moveY = stoi(parameters[3].c_str());
 
+			// Check if the shape index is valid.
+			// If not, print an error message and exit the loop.
 			if (shapes.size() > shapeIndex || shapeIndex < 1) {
 				cout << "Move command requires 'move <shapeIndex> <moveX> <moveY>', index must be a correct value." << endl;
 				break;
 			}
-			
-			Shape* shp = shapes[shapeIndex-1];
 
+			// Get the shape at the given index.
+			Shape* shp = shapes[shapeIndex - 1];
+
+			// Use dynamic casting to determine the type of the shape.
+			// If the shape is a rectangle, move it and print its information.
+			// If the shape is a square, move it and print its information.
+			// If the shape is a circle, move it and print its information.
 			Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
 			Square* shpSquare = dynamic_cast<Square*> (shp);
 			Circle* shpCircle = dynamic_cast<Circle*> (shp);
-
 			if (shpRect != NULL) {
 				shpRect->move(moveX, moveY);
 				cout << *shpRect;
@@ -213,21 +199,25 @@ int main()
 				shpCircle->move(moveX, moveY);
 				cout << *shpCircle;
 			}
-		}
-		else if (command.compare("display") == 0) {
+		} else if (command.compare("display") == 0) {
 			for (int i = 0; i < shapes.size(); i++) {
+				// Get the shape at the current index.
 				Shape* shp = shapes[i];
 
+				// Use dynamic casting to determine the type of the shape.
 				Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
 				Square* shpSquare = dynamic_cast<Square*> (shp);
 				Circle* shpCircle = dynamic_cast<Circle*> (shp);
 
+				// If the shape is a rectangle, print the index of the shape in the vector and the information about the rectangle.
 				if (shpRect != NULL) {
-					cout << "Index: " << i+1 << endl<< *shpRect << endl << endl;
+					cout << "Index: " << i + 1 << endl << *shpRect << endl << endl;
 				}
+				// If the shape is a square, print the index of the shape in the vector and the information about the square.
 				if (shpSquare != NULL) {
 					cout << "Index: " << i + 1 << endl << *shpSquare << endl << endl;
 				}
+				// If the shape is a circle, print the index of the shape in the vector and the information about the circle.
 				if (shpCircle != NULL) {
 					cout << "Index: " << i + 1 << endl << *shpCircle << endl << endl;
 				}
@@ -238,7 +228,7 @@ int main()
 		}
 
 		// destruct this as it is explicitly created with new.
-		delete cstr;
+		delete[] cstr;
 	}
 	for (int a = 0; a < shapes.size(); a++)
 	{
