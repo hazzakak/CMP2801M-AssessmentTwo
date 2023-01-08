@@ -8,11 +8,6 @@ string Shape::pointsToString() {
 	return ret;
 }
 
-void Shape::operator delete(void*)
-{
-	cout << "Shape has been deleted." << endl;
-}
-
 string Shape::toString()
 {
 	return "Shape";

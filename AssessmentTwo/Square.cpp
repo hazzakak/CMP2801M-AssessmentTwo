@@ -1,5 +1,10 @@
 #include "Square.h"
 
+Square::~Square()
+{
+	cout << "Square has been deleted" << endl;
+}
+
 // Calculates the points of the square based on its left top point and edge length
 void Square::calculatePoints() {
 	Point rightTop = Point(leftTop._x + edge, leftTop._y); // right top point is left top point + edge on the x-axis

@@ -13,6 +13,9 @@ public:
 		_width = w;
 		leftTop = Point(LTX, LTY);
 	}
+
+	~Rectangle();
+
 	friend ostream& operator<<(ostream& output, Rectangle& rect) {
 		output << "Shape: Rectangle\nWidth: " << rect._width << "\nHeight: " << rect._height << "\nArea: " << rect.area << "\nPerimeter: " << rect.perimeter << "\nPoints: " + rect.pointsToString() << endl;;
 		return output;
@@ -27,6 +30,7 @@ public:
 
 	virtual void move(int, int);
 	void scale(float, float);
+
 
 	string toString();
 };

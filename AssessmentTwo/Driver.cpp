@@ -55,6 +55,7 @@ int main()
 	// Continuously prompt the user for a command until they enter "exit".
 	while (userCommand.compare("exit") != 0)
 	{
+		wrongCmd:
 		cout << "Enter the command: ";
 		getline(cin, userCommand);
 
@@ -75,7 +76,7 @@ int main()
 			// If not, print an error message and exit the loop.
 			if (parameters.size() < 5 || parameters.size() > 5) {
 				cout << "4 parameters are required: 'addR <x> <y> <height> <width>'" << endl;
-				break;
+				goto wrongCmd;
 			}
 
 			// Convert the string parameters to integers and use them to create a new rectangle object.
@@ -100,7 +101,7 @@ int main()
 			// If not, print an error message and exit the loop.
 			if (parameters.size() < 4 || parameters.size() > 4) {
 				cout << "3 parameters are required: 'addS <x> <y> <edge>'" << endl;
-				break;
+				goto wrongCmd;
 			}
 
 			// Convert the string parameters to integers and use them to create a new square object.
@@ -124,7 +125,7 @@ int main()
 			// If not, print an error message and exit the loop.
 			if (parameters.size() < 4 || parameters.size() > 4) {
 				cout << "3 parameters are required: 'addC <x> <y> <radius>'" << endl;
-				break;
+				goto wrongCmd;
 			}
 
 			// Convert the string parameters to integers and use them to create a new circle object.
@@ -148,7 +149,7 @@ int main()
 			// If not, print an error message and exit the loop.
 			if (parameters.size() < 4 || parameters.size() > 4) {
 				cout << "3 parameters are required: 'scale <index> <scaleX> <scaleY>'" << endl;
-				break;
+				goto wrongCmd;
 			}
 
 			// Convert the string parameters to integers and floats.
@@ -156,7 +157,7 @@ int main()
 			float scaleX = stof(parameters[2].c_str());
 			float scaleY = stof(parameters[3].c_str());
 
-		} 
+		}
 		else if (command.compare("move") == 0) {
 			// If the command is "move", move the shape at the given index by the given amount.
 			// First, check if the correct number of parameters were given.
@@ -202,7 +203,8 @@ int main()
 			if (shpCircle != NULL) {
 				printAndMove(shpCircle);
 			}
-		} else if (command.compare("display") == 0) {
+		}
+		else if (command.compare("display") == 0) {
 			for (int i = 0; i < shapes.size(); i++) {
 				// Get the shape at the current index.
 				Shape* shp = shapes[i];
@@ -225,11 +227,19 @@ int main()
 					cout << "Index: " << i + 1 << endl << *shpCircle << endl << endl;
 				}
 			}
+		} else if (command.compare("clear") == 0) {
+			parameters.clear();
+			command.clear();
+			for (Shape* shape : shapes) {
+				delete shape;
+				shape = nullptr;
+			}
+			shapes.clear();
 		} else if (command.compare("exit") == 0) {
 			parameters.clear();
 			command.clear();
-		}
-		else {
+			userCommand = "exit";
+		} else {
 			cout << "Incorrect command" << endl;
 		}
 
@@ -240,9 +250,11 @@ int main()
 	userCommand.clear();
 
 	for (Shape* shape : shapes) {
-	  delete shape;
-	  shape = nullptr;
+		delete shape;
+		shape = nullptr;
 	}
+
+	shapes.clear();
 
 	cout << "Press any key to continue...";
 	std::getchar();

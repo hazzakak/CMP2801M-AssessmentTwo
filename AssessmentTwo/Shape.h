@@ -35,5 +35,5 @@ public:
     // Returns a string representation of the points that define the boundaries of the shape.
     string pointsToString();
     // Deletes the shape.
-    void operator delete(void*);
+    virtual ~Shape() {};
 };

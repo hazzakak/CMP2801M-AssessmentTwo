@@ -3,6 +3,11 @@
 #include "Circle.h"
 #include <iostream>
 
+Circle::~Circle()
+{
+	cout << "Circle has been deleted" << endl;
+}
+
 // Calculates the top left and bottom right points of the circle and stores them in the points vector.
 void Circle::calculatePoints() {
 	Point rightBottom = Point(leftTop._x + (2*radius), leftTop._y + (2*radius));

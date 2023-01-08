@@ -17,6 +17,8 @@ public:
         Shape::leftTop._y = y;
     }
 
+    ~Square();
+
     // Overloads the stream insertion operator to print a string representation of the square.
     friend ostream& operator<<(ostream& output, Square& sqr) {
         output << "Shape: Square\nEdge: " << sqr.edge << "\nArea: " << sqr.area << "\nPerimeter: " << sqr.perimeter << "\nPoints: " + sqr.pointsToString() << endl;

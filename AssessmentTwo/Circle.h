@@ -17,6 +17,8 @@ public:
 		radius = r; // set the radius of the Circle
 	}
 
+	~Circle();
+
 	// overload the stream insertion operator to output the Circle object
 	friend ostream& operator<<(ostream& output, Circle& circ) {
 		output << "Shape: Circle\nRadius: " << circ.radius << "\nDiameter: " << (circ.radius * 2) << "\nArea: " << circ.area << "\nPerimeter: " << circ.perimeter << "\nPoints: " << circ.pointsToString() << endl;
