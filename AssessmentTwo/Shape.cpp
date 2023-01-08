@@ -1,14 +1,5 @@
 #include "Shape.h"
 
-
-void Shape::calculatePerimeter()
-{
-}
-
-void Shape::calculatePoints()
-{
-}
-
 string Shape::pointsToString() {
 	string ret = "";
 	for (int i = 0; i < points.size(); i++) {

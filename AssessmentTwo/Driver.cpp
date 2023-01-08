@@ -184,20 +184,22 @@ int main()
 			// If the shape is a rectangle, move it and print its information.
 			// If the shape is a square, move it and print its information.
 			// If the shape is a circle, move it and print its information.
+			auto printAndMove = [&](auto shp) {
+				shp->move(moveX, moveY);
+				cout << *shp;
+			};
+
 			Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
 			Square* shpSquare = dynamic_cast<Square*> (shp);
 			Circle* shpCircle = dynamic_cast<Circle*> (shp);
 			if (shpRect != NULL) {
-				shpRect->move(moveX, moveY);
-				cout << *shpRect;
+				printAndMove(shpRect);
 			}
 			if (shpSquare != NULL) {
-				shpSquare->move(moveX, moveY);
-				cout << *shpSquare;
+				printAndMove(shpSquare);
 			}
 			if (shpCircle != NULL) {
-				shpCircle->move(moveX, moveY);
-				cout << *shpCircle;
+				printAndMove(shpCircle);
 			}
 		} else if (command.compare("display") == 0) {
 			for (int i = 0; i < shapes.size(); i++) {
@@ -222,6 +224,9 @@ int main()
 					cout << "Index: " << i + 1 << endl << *shpCircle << endl << endl;
 				}
 			}
+		}
+		else if (command.compare("exit") == 0) {
+			break;
 		}
 		else {
 			cout << "Incorrect command" << endl;

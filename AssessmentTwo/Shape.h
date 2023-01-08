@@ -27,9 +27,9 @@ public:
     // Calculates the area of the shape.
     virtual void calculateArea() = 0;
     // Calculates the perimeter of the shape.
-    virtual void calculatePerimeter();
+    virtual void calculatePerimeter() {};
     // Calculates the points that define the boundaries of the shape.
-    virtual void calculatePoints();
+    virtual void calculatePoints() {};
     // Returns a string representation of the shape.
     string toString();
     // Returns a string representation of the points that define the boundaries of the shape.
