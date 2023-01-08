@@ -74,7 +74,7 @@ int main()
 			// If the command is "addR", create a new rectangle with the given parameters.
 			// First, check if the correct number of parameters were given.
 			// If not, print an error message and exit the loop.
-			if (parameters.size() < 5 || parameters.size() > 5) {
+			if (parameters.size() != 5) {
 				cout << "4 parameters are required: 'addR <x> <y> <height> <width>'" << endl;
 				goto wrongCmd;
 			}
@@ -99,7 +99,7 @@ int main()
 			// If the command is "addS", create a new square with the given parameters.
 			// First, check if the correct number of parameters were given.
 			// If not, print an error message and exit the loop.
-			if (parameters.size() < 4 || parameters.size() > 4) {
+			if (parameters.size() != 4) {
 				cout << "3 parameters are required: 'addS <x> <y> <edge>'" << endl;
 				goto wrongCmd;
 			}
@@ -123,7 +123,7 @@ int main()
 			// If the command is "addC", create a new circle with the given parameters.
 			// First, check if the correct number of parameters were given.
 			// If not, print an error message and exit the loop.
-			if (parameters.size() < 4 || parameters.size() > 4) {
+			if (parameters.size() != 4) {
 				cout << "3 parameters are required: 'addC <x> <y> <radius>'" << endl;
 				goto wrongCmd;
 			}
@@ -147,7 +147,7 @@ int main()
 			// If the command is "scale", scale the shape at the given index by the given amount.
 			// First, check if the correct number of parameters were given.
 			// If not, print an error message and exit the loop.
-			if (parameters.size() < 4 || parameters.size() > 4) {
+			if (parameters.size() != 4) {
 				cout << "3 parameters are required: 'scale <index> <scaleX> <scaleY>'" << endl;
 				goto wrongCmd;
 			}
@@ -157,14 +157,38 @@ int main()
 			float scaleX = stof(parameters[2].c_str());
 			float scaleY = stof(parameters[3].c_str());
 
+			// Check if the shape index is valid.
+			// If not, print an error message and exit the loop.
+			if (shapes.size() < shapeIndex || shapeIndex < 1) {
+				cout << "Scale command requires 'scale <index> <scaleX> <scaleY>', index must be a correct value." << endl;
+				goto wrongCmd;
+			}
+
+			Shape* shp = shapes[shapeIndex - 1];
+
+			Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
+			Square* shpSquare = dynamic_cast<Square*> (shp);
+			Circle* shpCircle = dynamic_cast<Circle*> (shp);
+
+			if (shpRect != NULL) {
+				shpRect->scale(scaleX, scaleY);
+			}
+			if (shpSquare != NULL) {
+				shpSquare->scale(scaleX);
+			}
+			if (shpCircle != NULL) {
+				shpCircle->scale(scaleX);
+			}
+
+			cout << *shp;
 		}
 		else if (command.compare("move") == 0) {
 			// If the command is "move", move the shape at the given index by the given amount.
 			// First, check if the correct number of parameters were given.
 			// If not, print an error message and exit the loop.
-			if (parameters.size() < 4 || parameters.size() > 4) {
+			if (parameters.size() != 4) {
 				cout << "3 parameters are required: 'move <shapeIndex> <moveX> <moveY>'" << endl;
-				break;
+				goto wrongCmd;
 			}
 
 			// Convert the string parameters to integers.
@@ -174,58 +198,24 @@ int main()
 
 			// Check if the shape index is valid.
 			// If not, print an error message and exit the loop.
-			if (shapes.size() > shapeIndex || shapeIndex < 1) {
+			if (shapes.size() < shapeIndex || shapeIndex < 1) {
 				cout << "Move command requires 'move <shapeIndex> <moveX> <moveY>', index must be a correct value." << endl;
-				break;
+				goto wrongCmd;
 			}
 
 			// Get the shape at the given index.
 			Shape* shp = shapes[shapeIndex - 1];
 
-			// Use dynamic casting to determine the type of the shape.
-			// If the shape is a rectangle, move it and print its information.
-			// If the shape is a square, move it and print its information.
-			// If the shape is a circle, move it and print its information.
-			auto printAndMove = [&](auto shp) {
-				shp->move(moveX, moveY);
-				cout << *shp;
-			};
-
-			Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
-			Square* shpSquare = dynamic_cast<Square*> (shp);
-			Circle* shpCircle = dynamic_cast<Circle*> (shp);
-			if (shpRect != NULL) {
-				printAndMove(shpRect);
-			}
-			if (shpSquare != NULL) {
-				printAndMove(shpSquare);
-			}
-			if (shpCircle != NULL) {
-				printAndMove(shpCircle);
-			}
+			Movable* m = dynamic_cast<Movable*> (shp);
+			m->move(moveX, moveY);
+			cout << *shp;
 		}
 		else if (command.compare("display") == 0) {
 			for (int i = 0; i < shapes.size(); i++) {
 				// Get the shape at the current index.
 				Shape* shp = shapes[i];
 
-				// Use dynamic casting to determine the type of the shape.
-				Rectangle* shpRect = dynamic_cast<Rectangle*> (shp);
-				Square* shpSquare = dynamic_cast<Square*> (shp);
-				Circle* shpCircle = dynamic_cast<Circle*> (shp);
-
-				// If the shape is a rectangle, print the index of the shape in the vector and the information about the rectangle.
-				if (shpRect != NULL) {
-					cout << "Index: " << i + 1 << endl << *shpRect << endl << endl;
-				}
-				// If the shape is a square, print the index of the shape in the vector and the information about the square.
-				if (shpSquare != NULL) {
-					cout << "Index: " << i + 1 << endl << *shpSquare << endl << endl;
-				}
-				// If the shape is a circle, print the index of the shape in the vector and the information about the circle.
-				if (shpCircle != NULL) {
-					cout << "Index: " << i + 1 << endl << *shpCircle << endl << endl;
-				}
+				cout << "Index: " << i + 1 << endl << *shp << endl << endl;
 			}
 		} else if (command.compare("clear") == 0) {
 			parameters.clear();

@@ -26,16 +26,16 @@ public:
 	}
 
 	// function to calculate the points of the Circle object
-	virtual void calculatePoints();
+	void calculatePoints() override;
 
 	// function to calculate the area of the Circle object
-	virtual void calculateArea();
+	void calculateArea() override;
 
 	// function to calculate the perimeter of the Circle object
-	virtual void calculatePerimeter();
+	void calculatePerimeter() override;
 
 	// function to move the Circle object to a new location
-	virtual void move(int, int);
+	void move(int, int) override;
 
 	// function to scale the Circle object
 	void scale(float);

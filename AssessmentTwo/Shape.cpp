@@ -8,7 +8,8 @@ string Shape::pointsToString() {
 	return ret;
 }
 
-string Shape::toString()
+ostream& operator<<(ostream& output, Shape& shp)
 {
-	return "Shape";
+	output << shp.toString() << endl;;
+	return output;
 }

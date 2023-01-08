@@ -26,14 +26,17 @@ public:
     }
 
     // Calculates the points that define the boundaries of the square.
-    virtual void calculatePoints();
+    void calculatePoints() override;
+
     // Calculates the area of the square.
-    virtual void calculateArea();
+    void calculateArea() override;
+
     // Calculates the perimeter of the square.
-    virtual void calculatePerimeter();
+    void calculatePerimeter() override;
 
     // Moves the square to the specified position.
-    virtual void move(int, int);
+    void move(int, int) override;
+
     // Scales the square by the specified amount in the x-direction.
     void scale(float scaleX);
 
