@@ -156,7 +156,8 @@ int main()
 			float scaleX = stof(parameters[2].c_str());
 			float scaleY = stof(parameters[3].c_str());
 
-		} else if (command.compare("move") == 0) {
+		} 
+		else if (command.compare("move") == 0) {
 			// If the command is "move", move the shape at the given index by the given amount.
 			// First, check if the correct number of parameters were given.
 			// If not, print an error message and exit the loop.
@@ -224,9 +225,10 @@ int main()
 					cout << "Index: " << i + 1 << endl << *shpCircle << endl << endl;
 				}
 			}
-		}
-		else if (command.compare("exit") == 0) {
-			break;
+		} else if (command.compare("exit") == 0) {
+			parameters.clear();
+			shapes.clear();
+			command.clear();
 		}
 		else {
 			cout << "Incorrect command" << endl;
@@ -235,11 +237,8 @@ int main()
 		// destruct this as it is explicitly created with new.
 		delete[] cstr;
 	}
-	for (int a = 0; a < shapes.size(); a++)
-	{
-		Shape* shp = shapes[a];
-		delete shp;
-	}
+
+	userCommand.clear();
 
 	cout << "Press any key to continue...";
 	std::getchar();
