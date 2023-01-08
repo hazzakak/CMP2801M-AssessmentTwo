@@ -227,7 +227,6 @@ int main()
 			}
 		} else if (command.compare("exit") == 0) {
 			parameters.clear();
-			shapes.clear();
 			command.clear();
 		}
 		else {
@@ -239,6 +238,11 @@ int main()
 	}
 
 	userCommand.clear();
+
+	for (Shape* shape : shapes) {
+	  delete shape;
+	  shape = nullptr;
+	}
 
 	cout << "Press any key to continue...";
 	std::getchar();
