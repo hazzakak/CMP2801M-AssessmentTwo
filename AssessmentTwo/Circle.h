@@ -13,8 +13,8 @@ protected:
 public:
 	// constructor to initialize the Circle object with a center point and radius
 	Circle(int x, int y, int r) {
-		leftTop = Point(x, y); // set the left top point of the Circle
-		radius = r; // set the radius of the Circle
+		leftTop = Point(x, y); // set the left top point
+		radius = r; // set the radius
 	}
 
 	~Circle();
@@ -25,21 +25,21 @@ public:
 		return output;
 	}
 
-	// function to calculate the points of the Circle object
+	// function to calculate the points
 	void calculatePoints() override;
 
-	// function to calculate the area of the Circle object
+	// function to calculate the area
 	void calculateArea() override;
 
-	// function to calculate the perimeter of the Circle object
+	// function to calculate the perimeter
 	void calculatePerimeter() override;
 
 	// function to move the Circle object to a new location
 	void move(int, int) override;
 
-	// function to scale the Circle object
+	// function to scale
 	void scale(float);
 
-	// function to return a string representation of the Circle object
+	// function to return a string
 	string toString();
 };

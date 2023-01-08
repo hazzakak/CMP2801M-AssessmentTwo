@@ -7,7 +7,7 @@
 class Square : public Shape, public Movable
 {
 private:
-    // The length of the edge of the square.
+    // The length of the edge
     float edge;
 public:
     // Constructs a new square with the given edge length and top-left position.
@@ -19,19 +19,19 @@ public:
 
     ~Square();
 
-    // Overloads the stream insertion operator to print a string representation of the square.
+    // Overloads the stream insertion operator to print a string
     friend ostream& operator<<(ostream& output, Square& sqr) {
         output << "Shape: Square\nEdge: " << sqr.edge << "\nArea: " << sqr.area << "\nPerimeter: " << sqr.perimeter << "\nPoints: " + sqr.pointsToString() << endl;
         return output;
     }
 
-    // Calculates the points that define the boundaries of the square.
+    // Calculates the points that define the boundarie
     void calculatePoints() override;
 
-    // Calculates the area of the square.
+    // Calculates the area
     void calculateArea() override;
 
-    // Calculates the perimeter of the square.
+    // Calculates the perimeter
     void calculatePerimeter() override;
 
     // Moves the square to the specified position.

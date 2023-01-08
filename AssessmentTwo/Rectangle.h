@@ -27,19 +27,19 @@ public:
 		return output;
 	}
 
-	// Getter function for the height of the rectangle
+	// Getter function for the height
 	int getHeight() { return _height; }
 
-	// Getter function for the width of the rectangle
+	// Getter function for the width
 	int getWidth() { return _width; }
 
-	// Virtual function to calculate the points of the rectangle
+	// Virtual function to calculate the points
 	virtual void calculatePoints() override;
 
-	// Virtual function to calculate the area of the rectangle
+	// Virtual function to calculate the area
 	virtual void calculateArea() override;
 
-	// Virtual function to calculate the perimeter of the rectangle
+	// Virtual function to calculate the perimeter
 	virtual void calculatePerimeter() override;
 
 	// Virtual function to move the rectangle by a given x and y distance
@@ -48,6 +48,6 @@ public:
 	// Function to scale the rectangle by a given x and y factor
 	void scale(float, float);
 
-	// Virtual function to return a string representation of the rectangle
-	virtual string toString();
+	// function to return a string
+	string toString();
 };

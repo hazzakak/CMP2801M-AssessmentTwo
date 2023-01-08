@@ -23,25 +23,25 @@ protected:
     vector<Point> points{ Point(0,0), Point(0,0), Point(0,0), Point(0,0) };
 
 public:
-    // The top-left point of the shape.
+    // The top-left point
     Point leftTop;
 
-    // Sets the top-left point of the shape.
+    // Sets the top-left point
     void setLeftTop(Point pnt) { leftTop = pnt; }
 
-    // Calculates the area of the shape.
+    // Calculates the area, gets overriden.
     virtual void calculateArea() = 0;
 
-    // Calculates the perimeter of the shape.
+    // Calculates the perimeter, gets overriden.
     virtual void calculatePerimeter() {};
 
-    // Calculates the points that define the boundaries of the shape.
+    // Calculates the points that define the boundaries, gets overriden.
     virtual void calculatePoints() {};
 
-    // Returns a string representation of the shape.
+    // Returns a string representation, gets overriden.
     virtual string toString() = 0;
 
-    // Returns a string representation of the points that define the boundaries of the shape.
+    // Returns a string representation of the points that define the boundaries, gets overriden.
     string pointsToString();
 
     // Deletes the shape.
